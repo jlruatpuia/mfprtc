@@ -47,10 +47,13 @@ class AdminController extends Controller
         $product = new Product();
         if($files = $request->file('photo')){
             $ImageUpload = Image::make($files);
-            $originalPath = storage_path('app/public/products/');
+//            $originalPath = storage_path('app/public/products/');
+            $originalPath = storage_path('products/');
             $ImageUpload->save($originalPath.time().$files->getClientOriginalName());
 
-            $thumbnailPath = storage_path('app/public/products/thumb/');
+//            $thumbnailPath = storage_path('app/public/products/thumb/');
+            $thumbnailPath = storage_path('products/thumb/');
+            dd($originalPath, $thumbnailPath);
             $ImageUpload->resize(480, 480, function ($constraint) {
                 $constraint->aspectRatio();
             });
