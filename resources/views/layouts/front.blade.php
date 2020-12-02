@@ -21,27 +21,22 @@
     <link rel="stylesheet" href="{{ asset('front/css/vendor/bootstrap.min.css') }}">
 
     <!-- Plugin CSS Files -->
-    <link rel="stylesheet" href="{{ asset('front/css/plugin/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/plugin/material-scrolltop.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/plugin/price_range_style.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/plugin/in-number.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/plugin/venobox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/plugin/jquery.lineProgressbar.css') }}">
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/> -->
+    <link href="{{ asset('admin/js/toastr/toastr.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('front/css/plugin/plugins.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('front/css/main.min.css') }}">
-
-    <!-- Main Style CSS File -->
-    {{-- <link rel="stylesheet" href="{{ asset('front/css/main.css') }}"> --}}
+    <link href="{{ asset('css/blog.css') }}">
     @yield('css-after')
 </head>
 
 <body>
 <?php $total = 0 ?>
-@foreach((array)session('cart') as $id => $details)
-   <?php $total += $details['price'] * $details['quantity'] ?>
+@foreach((array) session('cart') as $id => $details)
+    <?php $total += $details['price'] * $details['quantity'] ?>
 @endforeach
     <!-- ::::::  Start Header Section  ::::::  -->
     <header>
@@ -79,10 +74,10 @@
                                             <!--Single Dropdown Menu-->
                                             <ul class="dropdown__menu pos-absolute">
                                                 <li class="dropdown__list">
-                                                    <a href="about.html" class="dropdown__link">Application</a>
+                                                    <a href="javascript:void(0);" class="dropdown__link">Application</a>
                                                 </li>
                                                 <li class="dropdown__list pos-relative">
-                                                    <a href="frequently-questions.html" class="dropdown__link">Feedback</a>
+                                                    <a href="javascript:void(0);" class="dropdown__link">Feedback</a>
                                                     {{-- <span class="menu-label menu-label--blue">New</span> --}}
                                                 </li>
                                                 <li class="dropdown__list">
@@ -141,7 +136,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#">{{ Auth::user()->name}}</a>
-                                        <a class="dropdown-item" href="#">Dashboard</a>
+                                        <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a>
                                         <div class="dropdown-divider"></div>
 {{--                                        <a class="dropdown-item" href="#">Log out</a>--}}
                                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -159,17 +154,18 @@
 {{--                                </li>--}}
                                 <!-- End Header Wishlist Box -->
                                 <!-- Start Header Wishlist Box -->
-                                <li>
-                                    <a href="wishlist.html">
-                                        <i class="icon-heart"></i>
-                                        <span class="item-count pos-absolute">3</span>
-                                    </a>
-                                </li> <!-- End Header Wishlist Box -->
+{{--                                <li>--}}
+{{--                                    <a href="wishlist.html">--}}
+{{--                                        <i class="icon-heart"></i>--}}
+{{--                                        <span class="item-count pos-absolute">3</span>--}}
+{{--                                    </a>--}}
+{{--                                </li> <!-- End Header Wishlist Box -->--}}
                                 <!-- Start Header Add Cart Box -->
                                 <li>
                                     <a href="#offcanvas-add-cart__box" class="offcanvas-toggle">
                                         <i class="icon-shopping-cart"></i>
-                                        <span class="wishlist-item-count pos-absolute">{{ $total }}</span>
+                                        <span class="wishlist-item-count pos-absolute">{{ count((array) session('cart')) }}</span>
+{{--                                        <span class="wishlist-item-count pos-absolute">0</span>--}}
                                     </a>
                                 </li> <!-- End Header Add Cart Box -->
                             </ul>
@@ -219,7 +215,8 @@
                             <li>
                                 <a href="#offcanvas-add-cart__box" class="offcanvas-toggle">
                                     <i class="icon-shopping-cart"></i>
-                                    <span class="wishlist-item-count pos-absolute">{{ $total }}</span>
+{{--                                    <span class="wishlist-item-count pos-absolute">{{ $total }}</span>--}}
+                                    <span class="wishlist-item-count pos-absolute">0</span>
                                 </a>
                             </li> <!-- End Header Add Cart Box -->
                             <li>
@@ -267,7 +264,8 @@
                     <li>
                         <a href="{{ route('cart') }}">
                             <i class="icon-shopping-cart"></i>
-                            <span class="wishlist-item-count pos-absolute">{{ $total }}</span>
+{{--                            <span class="wishlist-item-count pos-absolute">{{ $total }}</span>--}}
+                            <span class="wishlist-item-count pos-absolute">{{ count((array) session('cart')) }}</span>
                         </a>
                     </li> <!-- End Header Add Cart Box -->
                 </ul>  <!-- End Mobile User Action -->
@@ -322,41 +320,29 @@
                 <button class="offcanvas-close"><i class="fal fa-times"></i></button>
             </div>
             <!-- Start Add Cart Item Box-->
+
             <ul class="offcanvas-add-cart__menu">
-                <!-- Start Single Add Cart Item-->
-                <li class="offcanvas-add-cart__list pos-relative d-flex align-items-center justify-content-between ">
-                    <div class="offcanvas-add-cart__content d-flex align-items-start m-r-10">
-                        <div class="offcanvas-add-cart__img-box pos-relative">
-                            <a href="product-single-default.html" class="offcanvas-add-cart__img-link img-responsive">
-                              <img src="{{ asset('front/img/product/size-small/product-home-1-img-1.jpg') }}" alt="" class="add-cart__img">
-                            </a>
-                            <span class="offcanvas-add-cart__item-count pos-absolute">2x</span>
+            @if (session('cart'))
+                @foreach(session('cart') as $id=>$details)
+<!--                    --><?php //$total += $details['price'] * $details['quantity'] ?>
+                    <!-- Start Single Add Cart Item-->
+                    <li class="offcanvas-add-cart__list pos-relative d-flex align-items-center justify-content-between ">
+                        <div class="offcanvas-add-cart__content d-flex align-items-start m-r-10">
+                            <div class="offcanvas-add-cart__img-box pos-relative">
+                                <a href="{{ route('product.show', ['id' => $details['id']]) }}" class="offcanvas-add-cart__img-link img-responsive">
+                                    <img src="{{ url('storage/products/thumb/' . $details['photo']) }}" alt="" class="offcanvas-add-cart__img" style="width: 94px; height: 94px;">
+                                </a>
+                                <span class="offcanvas-add-cart__item-count pos-absolute">{{ $details['quantity'] }}x</span>
+                            </div>
+                            <div class="offcanvas-add-cart__detail">
+                                <a href="{{ route('product.show', ['id' => $details['id']]) }}" class="offcanvas-add-cart__link">{{ $details['name'] }}</a>
+                                <span class="offcanvas-add-cart__price">&#x20B9; {{ $details['price'] }}</span>
+                            </div>
                         </div>
-                        <div class="offcanvas-add-cart__detail">
-                            <a href="product-single-default.html" class="offcanvas-add-cart__link">Lucky Wooden Elephant</a>
-                            <span class="offcanvas-add-cart__price">$29.00</span>
-                            <span class="offcanvas-add-cart__info">Dimension: 40x60cm</span>
-                        </div>
-                    </div>
-                    <button class="offcanvas-add-cart__item-dismiss"><i class="fal fa-times"></i></button>
-                </li> <!-- Start Single Add Cart Item-->
-                <!-- Start Single Add Cart Item-->
-                <li class="offcanvas-add-cart__list pos-relative d-flex align-items-center justify-content-between">
-                    <div class="offcanvas-add-cart__content d-flex  align-items-start m-r-10">
-                        <div class="offcanvas-add-cart__img-box pos-relative">
-                            <a href="product-single-default.html" class="offcanvas-add-cart__img-link img-responsive">
-                              <img src="{{ asset('front/img/product/size-small/product-home-1-img-2.jpg') }}" alt="" class="add-cart__img">
-                            </a>
-                            <span class="offcanvas-add-cart__item-count pos-absolute">2x</span>
-                        </div>
-                        <div class="offcanvas-add-cart__detail">
-                            <a href="product-single-default.html" class="offcanvas-add-cart__link">Lucky Wooden Elephant</a>
-                            <span class="offcanvas-add-cart__price">$29.00</span>
-                            <span class="offcanvas-add-cart__info">Dimension: 40x60cm</span>
-                        </div>
-                    </div>
-                    <button class="offcanvas-add-cart__item-dismiss"><i class="fal fa-times"></i></button>
-                </li> <!-- Start Single Add Cart Item-->
+                        <button class="offcanvas-add-cart__item-dismiss remove-cart" data-id="{{ $details['id'] }}"><i class="fal fa-times"></i></button>
+                    </li> <!-- Start Single Add Cart Item-->
+                @endforeach
+            @endif
             </ul> <!-- Start Add Cart Item Box-->
             <!-- Start Add Cart Checkout Box-->
             <div class="offcanvas-add-cart__checkout-box-bottom">
@@ -364,23 +350,8 @@
                 <ul class="offcanvas-add-cart__checkout-info">
                     <!-- Start Single Add Cart Checkout Info-->
                     <li class="offcanvas-add-cart__checkout-list">
-                        <span class="offcanvas-add-cart__checkout-left-info">Subtotal</span>
-                        <span class="offcanvas-add-cart__checkout-right-info">$60.59</span>
-                    </li> <!-- End Single Add Cart Checkout Info-->
-                    <!-- Start Single Add Cart Checkout Info-->
-                    <li class="offcanvas-add-cart__checkout-list">
-                        <span class="offcanvas-add-cart__checkout-left-info">Shipping</span>
-                        <span class="offcanvas-add-cart__checkout-right-info">$7.00</span>
-                    </li> <!-- End Single Add Cart Checkout Info-->
-                    <!-- Start Single Add Cart Checkout Info-->
-                    <li class="offcanvas-add-cart__checkout-list">
-                        <span class="offcanvas-add-cart__checkout-left-info">Taxes</span>
-                        <span class="offcanvas-add-cart__checkout-right-info">$0.00</span>
-                    </li> <!-- End Single Add Cart Checkout Info-->
-                    <!-- Start Single Add Cart Checkout Info-->
-                    <li class="offcanvas-add-cart__checkout-list">
                         <span class="offcanvas-add-cart__checkout-left-info">Total</span>
-                        <span class="offcanvas-add-cart__checkout-right-info">$67.59</span>
+                        <span class="offcanvas-add-cart__checkout-right-info">&#x20B9; {{ $total }}</span>
                     </li> <!-- End Single Add Cart Checkout Info-->
                 </ul> <!-- End offcanvas Add Cart Checkout Info-->
 
@@ -395,90 +366,72 @@
 
     <!-- :::::: Start Main Container Wrapper :::::: -->
     @yield('content')
-
-
-
     <!-- :::::: End MainContainer Wrapper :::::: -->
 
     <!-- ::::::  Start  Footer ::::::  -->
-    @include('layouts.front-footer')
-
-    <!-- material-scrolltop button -->
-    <button class="material-scrolltop" type="button"></button>
-
-    <!-- Start Modal Add cart -->
-
-
-    <!-- Start Modal Quickview cart -->
-    <div class="modal fade" id="modalQuickView" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col text-right">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"> <i class="fal fa-times"></i></span>
-                                </button>
+{{--    @include('layouts.front-footer')--}}
+    <footer class="footer m-t-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-3 pt-1">
+                    <!--<a class="text-muted" href="#">Subscribe</a>-->
+                    <img src="{{ asset('images/logo.png') }}" class="img-fluid">
+                </div>
+                <div class="col-9 text-center">
+                    <!--<a class="blog-header-logo text-dark" href="#">Large</a>-->
+                    <table class="table table-borderless table-sm" style="border: 0">
+                        <tr>
+                            <td class="text-center">
+                                <span class="title-hindi d-none d-lg-block">मिजोरम फूड प्रोसेसिंग रिसर्च अँड ट्रेनिंग सेंटर</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span class="title-english">Mizoram Food Processing Research & Training Centre</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span class="subtitle d-none d-lg-block">(Autonomous body under Commerce & Industries Dept. Govt of Mizoram)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span class="regn-no">Regn No. MSR-792 under Mizoram Societies Registration Act</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span class="sub-heading d-none d-lg-block">Institute for Food Research, Post-Harvest Management</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <span class="sub-heading d-none d-lg-block">Food Processing Technology, Entrepreneurship & Skills Development</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="d-none d-lg-block">
+                    <div class="row">
+                        <div class="col-md-8 ">
+                            <div class="d-flex justify-content-left">
+                                <span class="address d-none d-lg-block">Phaibawkkawn, Seling, Aizawl District, Mizoram-796161</span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="product-gallery-box m-b-60">
-                                    <div class="modal-product-image--large">
-                                        <img class="img-fluid" src="{{ asset('front/img/product/gallery/gallery-large/product-gallery-large-1.jpg') }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="product-details-box">
-                                    <h5 class="title title--normal m-b-20">Aliquam lobortis</h5>
-                                    <div class="product__price">
-                                        <span class="product__price-del">$35.90</span>
-                                        <span class="product__price-reg">$31.69</span>
-                                    </div>
-                                    <ul class="product__review m-t-15">
-                                        <li class="product__review--fill"><i class="icon-star"></i></li>
-                                        <li class="product__review--fill"><i class="icon-star"></i></li>
-                                        <li class="product__review--fill"><i class="icon-star"></i></li>
-                                        <li class="product__review--fill"><i class="icon-star"></i></li>
-                                        <li class="product__review--blank"><i class="icon-star"></i></li>
-                                    </ul>
-                                    <div class="product__desc m-t-25 m-b-30">
-                                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will</p>
-                                    </div>
-
-                                    <div class="product-var p-t-30">
-                                        <div class="product-quantity product-var__item d-flex align-items-center flex-wrap">
-                                            <span class="product-var__text">Quantity: </span>
-                                            <form class="modal-quantity-scale m-l-20">
-                                                <div class="value-button" id="modal-decrease" onclick="decreaseValueModal()">-</div>
-                                                <input type="number" id="modal-number" value="1" />
-                                                <div class="value-button" id="modal-increase" onclick="increaseValueModal()">+</div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-links">
-                                        <div class="product-social m-tb-30">
-                                            <span>SHARE THIS PRODUCT</span>
-                                            <ul class="product-social-link">
-                                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="d-flex justify-content-right">
+                                <span class="address d-none d-lg-block">Email: mfprtc@gmail.com</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div> <!-- End Modal Quickview cart -->
 
+        </div>
+    </footer> <!-- ::::::  End  Footer ::::::  -->
+
+    <!-- material-scrolltop button -->
+    <button class="material-scrolltop" type="button"></button>
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('front/js/vendor/jquery-3.5.1.min.js') }}"></script>
@@ -487,22 +440,57 @@
     <script src="{{ asset('front/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Plugins JS Files -->
-    <script src="{{ asset('front/js/plugin/slick.min.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('front/js/plugin/material-scrolltop.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/price_range_script.js') }}"></script>
     <script src="{{ asset('front/js/plugin/in-number.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/jquery.elevateZoom-3.0.8.min.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/venobox.min.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/jquery.waypoints.js') }}"></script>
-    <script src="{{ asset('front/js/plugin/jquery.lineProgressbar.js') }}"></script>
-
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
-    <script src="assets/js/plugin/plugins.min.js"></script> -->
-
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="{{ asset('front/js/main.js') }}"></script>
+    <script src="{{ asset('admin/js/toastr/toastr.min.js') }}"></script>
+<script>
+    @if(Session::has('success'))
+    toastr.success("{{Session::get('success')}}")
+    @endif
+    @if(Session::has('info'))
+    toastr.info("{{Session::get('info')}}")
+    @endif
+    @if(Session::has('error'))
+    toastr.error("{{Session::get('error')}}")
+    @endif
+</script>
+<script type="text/javascript">
+    $(".update-cart").click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        $.ajax({
+            url: '{{ url('/cart/update') }}',
+            method: "patch",
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: ele.attr("data-id"),
+                quantity: ele.parents("tr").find(".quantity").val()
+            },
+            success: function (response) {
+                window.location.reload();
+            }
+        });
+    });
+    $(".remove-cart").click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        if(confirm("Are you sure")) {
+            $.ajax({
+                url: '{{ url('/cart/remove') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.attr("data-id")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
     @yield('js-after')
 </body>
 

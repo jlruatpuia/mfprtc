@@ -49,22 +49,26 @@
                                     </a>
                                 </td>
                                 <td class="product-name">
-                                    <a href="#">{{ $details['name'] }}</a>
+                                    <a href="{{ route('product.show', ['id' => $details['id']]) }}">{{ $details['name'] }}</a>
                                 </td>
                                 <td class="product-price-cart">
                                     <span class="amount">&#x20B9; {{ $details['price'] }}</span>
                                 </td>
                                 <td class="product-quantities">
                                     <div class="quantity d-inline-block">
-                                        <input type="number" min="1" step="1" value="1">
+                                        <input class="quantity" type="number" min="1" step="1" value="{{ $details['quantity'] }}">
                                     </div>
                                 </td>
                                 <td class="product-subtotal">
                                     &#x20B9; {{ $details['price'] * $details['quantity'] }}
                                 </td>
                                 <td class="product-remove">
-                                    <a href="javascript:void(0);"><i class="fa fa-pencil-alt"></i></a>
-                                    <a href="#"><i class="fa fa-times"></i></a>
+                                    <button class="text-primary update-cart" data-id="{{ $id }}">
+                                        <i class="fa fa-recycle"></i>
+                                    </button>
+                                    <button class="text-primary remove-cart" data-id="{{ $id }}">
+                                        <i class="fa fa-times"></i>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -75,12 +79,8 @@
                 <!-- Start Cart Table Button -->
                 <div class="cart-table-button m-t-10">
                     <div class="cart-table-button--left">
-                        <a href="#" class="btn btn--box btn--large btn--radius btn--green btn--green-hover-black btn--uppercase font--bold m-t-20">CONTINUE SHOPPING</a>
+                        <a href="{{ route('home') }}" class="btn btn--box btn--large btn--radius btn--green btn--green-hover-black btn--uppercase font--bold m-t-20">CONTINUE SHOPPING</a>
                     </div>
-{{--                    <div class="cart-table-button--right">--}}
-{{--                        <a href="#" class="btn btn--box btn--large btn--radius btn--green btn--green-hover-black btn--uppercase font--bold m-t-20 m-r-20">UPDATE SHOPPING CART</a>--}}
-{{--                        <a href="#" class="btn btn--box btn--large btn--radius btn--black btn--black-hover-green btn--uppercase font--bold m-t-20">Clear Shopping Cart</a>--}}
-{{--                    </div>--}}
                 </div>  <!-- End Cart Table Button -->
             </div>
         </div>
@@ -116,4 +116,7 @@
         </div>
     </div>
 </main> <!-- ::::::  End  Main Container Section  ::::::  -->
+@endsection
+@section('js-after')
+
 @endsection

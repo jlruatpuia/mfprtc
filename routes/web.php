@@ -37,7 +37,9 @@ Route::get('/management-team', function() { return view('front.management_team')
 Route::get('/photo-gallery', [ HomeController::class, 'photo_gallery'])->name('gallery');
 Route::get('/product/{id}', [ProductsController::class, 'show'])->name('product.show');
 Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
-Route::get('/cart/{id}/add', [ProductsController::class, 'addToCart'])->name('addToCart');
+Route::get('/cart/add/{id}', [ProductsController::class, 'addToCart'])->name('addToCart');
+Route::patch('/cart/update', [ProductsController::class, 'updateCart']);
+Route::delete('/cart/remove', [ProductsController::class, 'removeCart']);
 
 /*End of Front Page */
 Auth::routes();

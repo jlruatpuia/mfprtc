@@ -177,29 +177,6 @@
                             </p>
                         </a>
                     </li>
-{{--                    <li class="nav-item has-treeview {{ (request()->is('admin/photo*')) ? 'menu-open' : '' }}">--}}
-{{--                        <a href="#" class="nav-link {{ (request()->is('admin/photo*')) ? 'active' : '' }}">--}}
-{{--                            <i class="nav-icon fa fa-images"></i>--}}
-{{--                            <p>--}}
-{{--                                Photos--}}
-{{--                                <i class="fas fa-angle-left right"></i>--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                        <ul class="nav nav-treeview">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('admin.photos') }}" class="nav-link {{ (request()->is('admin/photos')) ? 'active' : '' }}">--}}
-{{--                                    <i class="far fa-circle nav-icon"></i>--}}
-{{--                                    <p>View</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('admin.photo.new') }}" class="nav-link {{ (request()->is('admin/photo/new')) ? 'active' : '' }}">--}}
-{{--                                    <i class="far fa-circle nav-icon"></i>--}}
-{{--                                    <p>Add New</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -214,10 +191,10 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
-        </div>
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+{{--        <div class="float-right d-none d-sm-block">--}}
+{{--            <b>Version</b> 3.0.5--}}
+{{--        </div>--}}
+        <strong>Copyright <a href="mailto:mfprtc@gmail.com">MFPRTC</a>.</strong> All rights
         reserved.
     </footer>
 

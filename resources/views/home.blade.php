@@ -18,20 +18,20 @@
                         </div>
                     </div> <!-- Start Sort Left Side -->
 
-                    <div class="sort-box-item d-flex align-items-center flex-warp">
-                        <span>Sort By:</span>
-                        <div class="sort-box__option">
-                            <label class="select-sort__arrow">
-                                <select name="select-sort" class="select-sort">
-                                    <option value="1">Relevance</option>
-                                    <option value="2">Name, A to Z</option>
-                                    <option value="3"> Name, Z to A </option>
-                                    <option value="4"> Price, low to high</option>
-                                    <option value="5">Price, high to low</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
+{{--                    <div class="sort-box-item d-flex align-items-center flex-warp">--}}
+{{--                        <span>Sort By:</span>--}}
+{{--                        <div class="sort-box__option">--}}
+{{--                            <label class="select-sort__arrow">--}}
+{{--                                <select name="select-sort" class="select-sort">--}}
+{{--                                    <option value="1">Relevance</option>--}}
+{{--                                    <option value="2">Name, A to Z</option>--}}
+{{--                                    <option value="3"> Name, Z to A </option>--}}
+{{--                                    <option value="4"> Price, low to high</option>--}}
+{{--                                    <option value="5">Price, high to low</option>--}}
+{{--                                </select>--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
                     <div class="sort-box-item">
                         <span>Showing 1 - 9 of 12 result</span>
@@ -58,7 +58,7 @@
 {{--                                                            <a href="#modalAddCart" data-toggle="modal">--}}
 {{--                                                                <i class="icon-shopping-cart"></i>--}}
 {{--                                                            </a>--}}
-                                                            <a href="{{ route('addToCart', ['id' => $product->id]) }}" data-toggle="modal">
+                                                            <a href="{{ route('addToCart', ['id' => $product->id, 'quantity' => 1]) }}" data-toggle="modal">
                                                                 <i class="icon-shopping-cart"></i>
                                                             </a>
                                                         </li>
@@ -109,7 +109,7 @@
                                             </div>
                                             <!-- Start Product Action Link-->
                                             <ul class="product__action--link-list m-t-30">
-                                                <li><a href="#modalAddCart" data-toggle="modal" class="btn--black btn--black-hover-green">Add to cart</a></li>
+                                                <li><a href="{{ route('addToCart', ['id' => $product->id, 'quantity' => 1]) }}" data-toggle="modal" class="btn--black btn--black-hover-green">Add to cart</a></li>
 {{--                                                <li><a href="compare.html"><i class="icon-sliders"></i></a></li>--}}
 {{--                                                <li><a href="wishlist.html"><i class="icon-heart"></i></a></li>--}}
                                             </ul> <!-- End Product Action Link -->
