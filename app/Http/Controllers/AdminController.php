@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 
@@ -46,20 +47,24 @@ class AdminController extends Controller
 
         $product = new Product();
         if($files = $request->file('photo')){
-            $ImageUpload = Image::make($files);
+//            $ImageUpload = Image::make($files);
 //            $originalPath = storage_path('app/public/products/');
-            $originalPath = storage_path('products/');
-            $ImageUpload->save($originalPath.time().$files->getClientOriginalName());
-
+//            $ImageUpload->save($originalPath.time().$files->getClientOriginalName());
+//
 //            $thumbnailPath = storage_path('app/public/products/thumb/');
-            $thumbnailPath = storage_path('products/thumb/');
-            dd($originalPath, $thumbnailPath);
-            $ImageUpload->resize(480, 480, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $ImageUpload = $ImageUpload->save($thumbnailPath.time().$files->getClientOriginalName());
-            $product->photo = time().$files->getClientOriginalName();
-    //            $photo->path = $.$files->getClientOriginalName();
+//            dd($originalPath, $thumbnailPath);
+//            $ImageUpload->resize(480, 480, function ($constraint) {
+//                $constraint->aspectRatio();
+//            });
+//            $ImageUpload = $ImageUpload->save($thumbnailPath.time().$files->getClientOriginalName());
+//            $product->photo = time().$files->getClientOriginalName();
+
+            $path = $request->file('photo');
+            $img = Image::make($path)->resize(480, 480)->encode();
+            $filename = time().'-'.$path->getClientOriginalExtension();
+            Storage::put($filename, $img);
+            Storage::move($filename, 'public/products/' . $filename);
+            $product->photo = $filename;
         }
         $product->name = $request->product_name;
         $product->description = $request->description;
