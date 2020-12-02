@@ -50,7 +50,7 @@
                                                 <!-- Start Product Image -->
                                                 <div class="product__img-box  pos-relative">
                                                     <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product__img--link">
-                                                        <img class="product__img img-fluid" src="{{ url('storage/products/thumb/' . $product->photo) }}" alt="">
+                                                        <img class="product__img img-fluid" src="{{ url('storage/products/' . $product->photo) }}" alt="">
                                                     </a>
                                                     <!-- Start Product Action Link-->
                                                     <ul class="product__action--link pos-absolute">
