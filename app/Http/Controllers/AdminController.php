@@ -61,7 +61,7 @@ class AdminController extends Controller
 
             $path = $request->file('photo');
             $img = Image::make($path)->resize(480, 480)->encode();
-            $filename = time().'-'.$path->getClientOriginalExtension();
+            $filename = time().'.'.$path->getClientOriginalExtension();
             Storage::put($filename, $img);
             Storage::move($filename, 'public/products/' . $filename);
             $product->photo = $filename;
