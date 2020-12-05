@@ -216,7 +216,7 @@
                                 <a href="#offcanvas-add-cart__box" class="offcanvas-toggle">
                                     <i class="icon-shopping-cart"></i>
 {{--                                    <span class="wishlist-item-count pos-absolute">{{ $total }}</span>--}}
-                                    <span class="wishlist-item-count pos-absolute">0</span>
+                                    <span class="wishlist-item-count pos-absolute">{{ count((array) session('cart')) }}</span>
                                 </a>
                             </li> <!-- End Header Add Cart Box -->
                             <li>
