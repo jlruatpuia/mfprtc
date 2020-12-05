@@ -26,8 +26,8 @@
                     <div class="col-md-5">
                         <div class="product-gallery-box product-gallery-box--default m-b-60">
                             <div class="product-image--large product-image--large-horizontal">
-                                <img class="img-fluid" id="img-zoom" src="{{ url('storage/products/' . $product->photo) }}"
-                                     data-zoom-image="{{ url('storage/products/' . $product->photo) }}" alt="">
+                                <img class="img-fluid" id="img-zoom" src="{{ url($product->photo) }}"
+                                     data-zoom-image="{{ url($product->photo) }}" alt="">
                             </div>
                         </div>
                     </div>

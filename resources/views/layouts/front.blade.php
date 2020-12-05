@@ -330,7 +330,7 @@
                         <div class="offcanvas-add-cart__content d-flex align-items-start m-r-10">
                             <div class="offcanvas-add-cart__img-box pos-relative">
                                 <a href="{{ route('product.show', ['id' => $details['id']]) }}" class="offcanvas-add-cart__img-link img-responsive">
-                                    <img src="{{ url('storage/products/thumb/' . $details['photo']) }}" alt="" class="offcanvas-add-cart__img" style="width: 94px; height: 94px;">
+                                    <img src="{{ url( $details['photo']) }}" alt="" class="offcanvas-add-cart__img" style="width: 94px; height: 94px;">
                                 </a>
                                 <span class="offcanvas-add-cart__item-count pos-absolute">{{ $details['quantity'] }}x</span>
                             </div>
