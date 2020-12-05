@@ -280,8 +280,8 @@
                         <li>
                             <a href="javascript:void(0);"><span>Training</span></a>
                             <ul class="sub-menu">
-                                <li><a href="about.html">Application</a></li>
-                                <li><a href="frequently-questions.html">Feedback</a></li>
+                                <li><a href="javascript:void(0);">Application</a></li>
+                                <li><a href="javascript:void(0);">Feedback</a></li>
                                 <li><a href="{{ route('hostel') }}">Hostel Rules</a></li>
                             </ul>
                         </li>
