@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="{{ asset('front/css/vendor/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/vendor/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/vendor/plaza-icon.css') }}">
-    <link rel="stylesheet" href="{{ asset('front/css/vendor/bootstrap.min.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('front/css/vendor/bootstrap.min.css') }}">--}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Plugin CSS Files -->
     <link rel="stylesheet" href="{{ asset('front/css/plugin/material-scrolltop.css') }}">
@@ -74,10 +75,10 @@
                                             <!--Single Dropdown Menu-->
                                             <ul class="dropdown__menu pos-absolute">
                                                 <li class="dropdown__list">
-                                                    <a href="javascript:void(0);" class="dropdown__link">Application</a>
+                                                    <a href="{{ route('training.application') }}" class="dropdown__link">Application</a>
                                                 </li>
                                                 <li class="dropdown__list pos-relative">
-                                                    <a href="javascript:void(0);" class="dropdown__link">Feedback</a>
+                                                    <a href="{{ route('training.feedback') }}" class="dropdown__link">Feedback</a>
                                                     {{-- <span class="menu-label menu-label--blue">New</span> --}}
                                                 </li>
                                                 <li class="dropdown__list">
@@ -280,8 +281,8 @@
                         <li>
                             <a href="javascript:void(0);"><span>Training</span></a>
                             <ul class="sub-menu">
-                                <li><a href="javascript:void(0);">Application</a></li>
-                                <li><a href="javascript:void(0);">Feedback</a></li>
+                                <li><a href="{{ route('training.application') }}">Application</a></li>
+                                <li><a href="{{ route('training.feedback') }}">Feedback</a></li>
                                 <li><a href="{{ route('hostel') }}">Hostel Rules</a></li>
                             </ul>
                         </li>

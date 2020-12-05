@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TrainingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,9 @@ Route::get('/cart', [ProductsController::class, 'cart'])->name('cart');
 Route::get('/cart/add/{id}', [ProductsController::class, 'addToCart'])->name('addToCart');
 Route::patch('/cart/update', [ProductsController::class, 'updateCart']);
 Route::delete('/cart/remove', [ProductsController::class, 'removeCart']);
+Route::get('/training-application', [HomeController::class, 'apply_training']) -> name('training.application');
+Route::get('/training-feedback', function (){ return view('front.training_feedback'); }) -> name('training.feedback');
+Route::post('/apply-training', [TrainingsController::class, 'store'])->name('training.apply');
 
 /*End of Front Page */
 Auth::routes();
