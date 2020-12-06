@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/vendor/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/vendor/plaza-icon.css') }}">
 {{--    <link rel="stylesheet" href="{{ asset('front/css/vendor/bootstrap.min.css') }}">--}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <!-- Plugin CSS Files -->
     <link rel="stylesheet" href="{{ asset('front/css/plugin/material-scrolltop.css') }}">
@@ -30,7 +30,57 @@
 
     <link rel="stylesheet" href="{{ asset('front/css/plugin/plugins.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('front/css/main.min.css') }}">
-    <link href="{{ asset('css/blog.css') }}">
+{{--    <link href="{{ asset('css/blog.css') }}">--}}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Open+Sans:wght@300&family=Playfair+Display&family=Roboto:wght@300&display=swap');
+        .title-hindi {
+            font-weight: bold;
+        }
+        @media(min-width: 544px) {
+            .title-english {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: large;
+                font-weight: bold;
+                color: green;
+            }
+            .regn-no {
+                font-weight: unset;
+            }
+        }
+        @media(min-width: 544px) {
+            .title-english {
+                font-family: 'Roboto', sans-serif;;
+                font-size: x-large;
+                font-weight: bold;
+                color: green;
+            }
+        }
+        .subtitle {
+            font-family: 'Open Sans Condensed', sans-serif;
+
+        }
+
+        .regn-no {
+            font-size: smaller;
+            color: darkred;
+            font-weight: bold;
+            font-family: 'Roboto', sans-serif;;
+        }
+
+        .sub-heading {
+            font-family: 'Cookie', cursive;;
+            font-size: large;
+            color: #6f59e4;
+        }
+        .blog-footer{
+            color: #fff;
+        }
+        .address {
+            font-family: 'Roboto', sans-serif;
+            font-size: smaller;
+            font-weight: 200;
+        }
+    </style>
     @yield('css-after')
 </head>
 
@@ -254,13 +304,6 @@
                             <i class="icon-users"></i>
                         </a>
                     </li> <!-- End Header Wishlist Box -->
-                    <!-- Start Header Wishlist Box -->
-                    <li>
-                        <a href="wishlist.html">
-                            <i class="icon-heart"></i>
-                            <span class="item-count pos-absolute">3</span>
-                        </a>
-                    </li> <!-- End Header Wishlist Box -->
                     <!-- Start Header Add Cart Box -->
                     <li>
                         <a href="{{ route('cart') }}">
@@ -371,65 +414,75 @@
 
     <!-- ::::::  Start  Footer ::::::  -->
 {{--    @include('layouts.front-footer')--}}
-    <footer class="footer m-t-100">
+{{--    <footer class="footer m-t-100 m-b-50">--}}
+{{--        <div class="container">--}}
+{{--            <div class="col-md-3">--}}
+{{--                <img src="{{ asset('images/location.png') }}" class="img-fluid" alt="">--}}
+{{--            </div>--}}
+{{--            <div class="col-md-3">--}}
+{{--                <div class="row">--}}
+{{--                    <div class="container">--}}
+{{--                        <div class="col-sm-3">--}}
+{{--                            <img src="{{ asset('images/logo.png') }}" class="img-fluid" style="width: 150px; height: 150px">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </footer>--}}
+    <div class="footer m-t-100 m-b-50">
         <div class="container">
             <div class="row">
-                <div class="col-3 pt-1">
-                    <!--<a class="text-muted" href="#">Subscribe</a>-->
-                    <img src="{{ asset('images/logo.png') }}" class="img-fluid">
+                <div class="col-md-3 col-sm-12">
+                    <img src="{{ asset('images/location.png') }}" class="img-fluid d-block mx-auto" alt="">
                 </div>
-                <div class="col-9 text-center">
-                    <!--<a class="blog-header-logo text-dark" href="#">Large</a>-->
-                    <table class="table table-borderless table-sm" style="border: 0">
-                        <tr>
-                            <td class="text-center">
-                                <span class="title-hindi d-none d-lg-block">मिजोरम फूड प्रोसेसिंग रिसर्च अँड ट्रेनिंग सेंटर</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <span class="title-english">Mizoram Food Processing Research & Training Centre</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <span class="subtitle d-none d-lg-block">(Autonomous body under Commerce & Industries Dept. Govt of Mizoram)</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <span class="regn-no">Regn No. MSR-792 under Mizoram Societies Registration Act</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <span class="sub-heading d-none d-lg-block">Institute for Food Research, Post-Harvest Management</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <span class="sub-heading d-none d-lg-block">Food Processing Technology, Entrepreneurship & Skills Development</span>
-                            </td>
-                        </tr>
-                    </table>
-                    <hr class="d-none d-lg-block">
-                    <div class="row">
-                        <div class="col-md-8 ">
-                            <div class="d-flex justify-content-left">
-                                <span class="address d-none d-lg-block">Phaibawkkawn, Seling, Aizawl District, Mizoram-796161</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex justify-content-right">
-                                <span class="address d-none d-lg-block">Email: mfprtc@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
+                <hr />
+                <div class="col-md-2 col-sm-12">
+                    <img src="{{ asset('images/logo.png') }}" class="img-fluid d-block mx-auto">
+                </div>
+                <div class="col-md-7 col-sm-12">
+                    <p class="text-center title-hindi mb-0">मिजोरम फूड प्रोसेसिंग रिसर्च अँड ट्रेनिंग सेंटर</p>
+                    <p class="text-center title-english mt-0 mb-0">Mizoram Food Processing Research & Training Centre</p>
+                    <p class="text-center subtitle mt-0 mb-0">(Autonomous body under Commerce & Industries Dept. Govt of Mizoram)</p>
+                    <p class="text-center regn-no mt-0 mb-0">Regn No. MSR-792 under Mizoram Societies Registration Act</p>
+                    <p class="text-center sub-heading mt-0 mb-0">Institute for Food Research, Post-Harvest Management</p>
+                    <p class="text-center sub-heading mt-0 mb-0">Food Processing Technology, Entrepreneurship & Skills Development</p>
+                    <p class="text-center address mt-0 mb-0">Phaibawkkawn, Seling, Aizawl District, Mizoram-796161</p>
+                    <p class="text-center address mt-0 mb-0">Email: mfprtc@gmail.com</p>
                 </div>
             </div>
-
         </div>
-    </footer> <!-- ::::::  End  Footer ::::::  -->
+    </div>
+{{--                        <tr>--}}
+{{--                            <td class="text-center">--}}
+{{--                                <span class="sub-heading d-none d-lg-block">Institute for Food Research, Post-Harvest Management</span>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td class="text-center">--}}
+{{--                                <span class="sub-heading d-none d-lg-block">Food Processing Technology, Entrepreneurship & Skills Development</span>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+{{--                    </table>--}}
+{{--                    <hr class="d-none d-lg-block">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-8 ">--}}
+{{--                            <div class="d-flex justify-content-left">--}}
+{{--                                <span class="address d-none d-lg-block">Phaibawkkawn, Seling, Aizawl District, Mizoram-796161</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-4">--}}
+{{--                            <div class="d-flex justify-content-right">--}}
+{{--                                <span class="address d-none d-lg-block">Email: mfprtc@gmail.com</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+{{--    </footer> <!-- ::::::  End  Footer ::::::  -->--}}
 
     <!-- material-scrolltop button -->
     <button class="material-scrolltop" type="button"></button>
