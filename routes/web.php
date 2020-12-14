@@ -44,7 +44,7 @@ Route::delete('/cart/remove', [ProductsController::class, 'removeCart']);
 Route::get('/training-application', [HomeController::class, 'apply_training']) -> name('training.application');
 Route::get('/training-feedback', function (){ return view('front.training_feedback'); }) -> name('training.feedback');
 Route::post('/apply-training', [TrainingsController::class, 'store'])->name('training.apply');
-
+Route::get('/invoice', function() { return view('front.invoice'); });
 /*End of Front Page */
 Auth::routes();
 
@@ -63,6 +63,11 @@ Route::post('/admin/training/store', [AdminController::class, 'training_store'])
 Route::get('/admin/training/{id}/edit', [AdminController::class, 'training_edit'])->name('admin.training.edit');
 Route::match(['put', 'patch'], '/admin/training/{id}/update', [AdminController::class, 'training_update'])->name('admin.training.update');
 Route::get('/admin/training/{id}/delete', [AdminController::class, 'training_delete'])->name('admin.training.delete');
+Route::get('/admin/trainings/applications', [TrainingsController::class, 'index'])->name('admin.trainings.applications');
+Route::get('/admin/trainings/applicants', [TrainingsController::class, 'getApplicants'])->name('admin.trainings.applications_by_course');
+Route::get('/admin/trainings/applicants2/{id}', [TrainingsController::class, 'getApplicants2'])->name('admin.trainings.applications_by_course2');
+Route::get('/admin/trainings/applicant/{id}', [TrainingsController::class, 'getApplicant'])->name('admin.trainings.applicant');
+//Route::post('/admin/trainings/applications', [TrainingsController::class, 'getApplicants'])->name('admin.trainings.applications_by_course');
 Route::get('admin/photos', [AdminController::class, 'photos_index'])->name('admin.photos');
 Route::get('admin/photo/new', [AdminController::class, 'photo_create'])->name('admin.photo.new');
 Route::post('admin/photo/store', [AdminController::class, 'photo_store'])->name('admin.photo.store');

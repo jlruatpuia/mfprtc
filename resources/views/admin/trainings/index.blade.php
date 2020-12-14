@@ -20,55 +20,62 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="card-header">
-            <h3 class="card-title">List of Training</h3>
-            <a href="{{ route('admin.training.new') }}" class="btn btn-default float-right"><i class="fa fa-plus"></i> Add New</a>
-        </div>
-        <div class="card-body">
-            @if($trainings->count() > 0)
-
-                <table id="productsTable" class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th class="text-center">#</th>
-                        <th class="text-center">Course Name</th>
-                        <th class="text-center">Date</th>
-                        <th class="text-center"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($trainings as $index => $training)
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">List of Training</h3>
+                    <a href="{{ route('admin.training.new') }}" class="btn btn-default float-right"><i class="fa fa-plus"></i> Add New</a>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-bordered table-hover">
+                        <thead>
                         <tr>
-                            <td class="text-center">{{ $index + 1 }}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col">
-                                    <h6 class="card-title">{{ $training->course_name }}</h6>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                    <p class="text-muted">{{ $training->description }}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center">{{ $training->duration }}</td>
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('admin.training.edit', ['id' => $training->id]) }}" class="btn btn-primary"
-                                       data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ route('admin.training.delete', ['id' => $training->id]) }}" class="btn btn-danger"
-                                       data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this?');">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Course Name</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center"></th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @forelse($trainings as $index => $training)
+                            <tr>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6 class="card-title">
+                                                <a href="{{ route('admin.trainings.applications_by_course2', $training->id) }}">{{ $training->course_name }}</a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted">{{ Str::limit($training->description) }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ $training->duration }}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{{ route('admin.training.edit', ['id' => $training->id]) }}" class="btn btn-primary"
+                                           data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.training.delete', ['id' => $training->id]) }}" class="btn btn-danger"
+                                           data-toggle="tooltip" title="Delete" onclick="return confirm('Are you sure you want to delete this?');">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4">No training course available</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        @endif
     </section>
     <!-- /.content -->
 @endsection
