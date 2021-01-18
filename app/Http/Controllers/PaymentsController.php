@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Razorpay\Api\Api;
@@ -16,7 +18,7 @@ class PaymentsController extends Controller
     }
 
     public function initiate(Request $request) {
-        //dd($request->all());
+        //dd(json_encode(session('cart')));
         $user_id = Auth::user()->id;
         $amount = $request->input('amount');
 
@@ -29,6 +31,24 @@ class PaymentsController extends Controller
         $payment->amount = $amount;
         $payment->payment_id = $orderId;
         $payment->save();
+
+        $orders = new Order();
+        $orders->user_id = $user_id;
+        $orders->order_date = Carbon::now();
+        $orders->payment_id = $orderId;
+        $orders->amount = $amount;
+        $itemsArray = [];
+        foreach (session('cart') as $key => $item){
+//            $element =;
+            $element['id'] = $item['id'];
+            $element['name'] = $item['name'];
+            $element['price'] = $item['price'];
+            $element['quantity'] = $item['quantity'];
+
+            $itemsArray[] = $element;
+        }
+        $orders->items = json_encode($itemsArray);
+        $orders->save();
 
         $data = array('order_id' => $orderId, 'amount' => $amount);
         Session::put('order_id', $orderId);
@@ -63,6 +83,9 @@ class PaymentsController extends Controller
 
         if($success) {
             $payment->save();
+            Session::forget('cart');
+            Session::forget('order_id');
+            Session::forget('amount');
             return view('payments.success');
         } else {
             return redirect()->route('error');

@@ -186,7 +186,7 @@
                                         <i class="icon-users"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">{{ Auth::user()->name}}</a>
+                                        <a class="dropdown-item" href="{{ route('user-profile') }}">{{ Auth::user()->name}}</a>
                                         <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a>
                                         <div class="dropdown-divider"></div>
 {{--                                        <a class="dropdown-item" href="#">Log out</a>--}}

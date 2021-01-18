@@ -66,7 +66,7 @@ class ProductsController extends Controller
 
     public function updateCart(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         if($request->id and $request->quantity)
         {
             $cart = Session::get('cart');

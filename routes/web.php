@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\TrainingsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,3 +79,11 @@ Route::get('admin/photo/{id}/delete', [AdminController::class, 'photo_delete'])-
 Route::post('initiate-payment', [PaymentsController::class, 'initiate'])->name('initiate-payment');
 Route::post('complete-payment', [PaymentsController::class, 'payment'])->name('complete-payment');
 Route::get('payment-success', function() { return view('payments.success'); });
+
+Route::get('user-profile', [UserController::class, 'view'])->name('user-profile');
+Route::get('user-address', [UserController::class, 'address'])->name('user-address');
+Route::post('add-address', [UserController::class, 'add_address'])->name('add-address');
+Route::get('edit-address', [UserController::class, 'edit_address'])->name('edit-address');
+Route::match(['put', 'patch'], 'update-address/{id}', [UserController::class, 'update_address'])->name('update-address');
+
+Route::get('order-details/{id}', [UserController::class, 'orders'])->name('order-details');

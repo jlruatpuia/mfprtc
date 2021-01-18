@@ -9,7 +9,7 @@
                     <ul class="page-breadcrumb__menu">
                         <li class="page-breadcrumb__nav"><a href="#">Home</a></li>
                         <li class="page-breadcrumb__nav">Payment</li>
-                        <li class="page-breadcrumb__nav active">Initiate</li>
+                        <li class="page-breadcrumb__nav active">Success</li>
                     </ul>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 Having trouble? <a href="">Contact us</a>
             </p>
             <p class="lead">
-                <a class="btn btn-primary btn-sm" href="https://bootstrapcreative.com/" role="button">Continue to homepage</a>
+                <a class="btn btn-primary btn-sm" href="{{ route('home') }}" role="button">Continue to homepage</a>
             </p>
         </div>
     </main>
