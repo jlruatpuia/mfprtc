@@ -92,25 +92,29 @@
                         <h5 class="sidebar__title">Cart Total</h5>
                     </div>
                     <h6 class="total-cost">Total products Price<span>&#x20B9; {{ $total }}</span></h6>
-                    <div class="total-shipping">
-                        <span>Total shipping</span>
-                        <ul class="shipping-cost m-t-10">
-                            <li>
-                                <label for="ship-standard">
-                                    <input type="radio" class="shipping-select" name="shipping-cost" value="Standard" id="ship-standard" checked><span>Standard</span>
-                                </label>
-                                <span class="ship-price">$20.00</span>
-                            </li>
-                            <li>
-                                <label for="ship-express">
-                                    <input type="radio" class="shipping-select" name="shipping-cost" value="Express" id="ship-express"><span>Express</span>
-                                </label>
-                                <span class="ship-price">$30.00</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <h4 class="grand-total m-tb-25">Grand Total <span>&#x20B9; {{ $total }}</span></h4>
-                    <button class="btn btn--box btn--small btn--radius btn--green btn--green-hover-black btn--uppercase font--semi-bold" type="submit">PROCEED TO CHECKOUT</button>
+{{--                    <div class="total-shipping">--}}
+{{--                        <span>Total shipping</span>--}}
+{{--                        <ul class="shipping-cost m-t-10">--}}
+{{--                            <li>--}}
+{{--                                <label for="ship-standard">--}}
+{{--                                    <input type="radio" class="shipping-select" name="shipping-cost" value="Standard" id="ship-standard" checked><span>Standard</span>--}}
+{{--                                </label>--}}
+{{--                                <span class="ship-price">$20.00</span>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <label for="ship-express">--}}
+{{--                                    <input type="radio" class="shipping-select" name="shipping-cost" value="Express" id="ship-express"><span>Express</span>--}}
+{{--                                </label>--}}
+{{--                                <span class="ship-price">$30.00</span>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+                    <form action="{{ route('initiate-payment') }}" method="post">
+                        @csrf
+                        <h4 class="grand-total m-tb-25">Grand Total <span>&#x20B9; {{ $total }}</span></h4>
+                        <input type="hidden" value="{{ $total }}" id="amount" name="amount">
+                        <button class="btn btn--box btn--small btn--radius btn--green btn--green-hover-black btn--uppercase font--semi-bold" type="submit">PROCEED TO CHECKOUT</button>
+                    </form>
                 </div>
             </div>
         </div>

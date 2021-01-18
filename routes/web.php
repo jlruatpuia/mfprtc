@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\TrainingsController;
 use Illuminate\Support\Facades\Route;
@@ -73,3 +74,7 @@ Route::get('admin/photo/new', [AdminController::class, 'photo_create'])->name('a
 Route::post('admin/photo/store', [AdminController::class, 'photo_store'])->name('admin.photo.store');
 Route::get('admin/photo/{id}/delete', [AdminController::class, 'photo_delete'])->name('admin.photo.delete');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('initiate-payment', [PaymentsController::class, 'initiate'])->name('initiate-payment');
+Route::post('complete-payment', [PaymentsController::class, 'payment'])->name('complete-payment');
+Route::get('payment-success', function() { return view('payments.success'); });
