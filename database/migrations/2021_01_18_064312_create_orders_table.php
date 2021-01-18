@@ -17,7 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->date('order_date');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('payment_id')->constrained();
+//            $table->foreignId('payment_id')->constrained();
+            $table->string('payment_id');
             $table->json('items');
             $table->json('address');
             $table->timestamps();
