@@ -300,7 +300,7 @@
                 <ul class="header__user-action-icon m-tb-15 text-center">
                     <!-- Start Header Wishlist Box -->
                     <li>
-                        <a href="my-account.html">
+                        <a href="{{ route('user-profile') }}">
                             <i class="icon-users"></i>
                         </a>
                     </li> <!-- End Header Wishlist Box -->
